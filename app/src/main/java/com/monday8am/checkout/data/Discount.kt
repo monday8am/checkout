@@ -8,4 +8,4 @@ enum class DiscountType {
 
 data class Discount(val discountType: DiscountType,
                     val productCode: Code,
-                    val newPrice: Price?)
+                    val newPrice: Price)

@@ -58,7 +58,7 @@ class CheckoutReducerTest {
     }
 
     @Test
-    fun `select some products for checkout and no discount`() {
+    fun `select for checkout and no discount`() {
         products.forEach {
             store.dispatch(ModifyCheckout(product = it))
         }
@@ -69,8 +69,30 @@ class CheckoutReducerTest {
     }
 
     @Test
-    fun `select some and delete a random one`() {
+    fun `select some products and delete two of them`() {
+        products.forEach {
+            store.dispatch(ModifyCheckout(product = it))
+        }
 
+        val mug = products[0]
+
+        store.dispatch(ModifyCheckout(product = mug, remove = true))
+        store.dispatch(ModifyCheckout(product = mug, remove = true))
+
+        val totalMugs = products.count { it.code == mug.code }
+        val selectedMugs = store.state.selectedItems.count { it.code == mug.code }
+
+        assertEquals(selectedMugs, totalMugs - 2)
+    }
+
+    @Test
+    fun `delete unselected product`() {
+        store.dispatch(ModifyCheckout(product = products[0])) // Select a Mug
+        store.dispatch(ModifyCheckout(product = products[1], remove = true)) // Try to delete a Voucher
+
+        assertEquals(store.state.selectedItems.count(), 1)
+        assertEquals(store.state.selectedItems[0], products[0])
+        assertEquals(store.state.discountedPrice, 0f)
     }
 
     @Test

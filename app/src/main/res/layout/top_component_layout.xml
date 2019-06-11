@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+    <TextView
+            android:text="Checkout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/resultHeaderTexView"/>
+    <TextView
+            android:text="0.00"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/resultValueTextView"/>
+    <TextView
+            android:text="Discount"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/discountHeaderTextView"/>
+    <TextView
+            android:text="0.00"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/discountValueTextView"/>
+    <TextView
+            android:text="Total"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/totalHeaderTextView"/>
+    <TextView
+            android:text="0.00"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/totalValueTextView"/>
+</LinearLayout>

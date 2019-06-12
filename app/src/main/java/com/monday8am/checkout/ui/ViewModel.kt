@@ -8,7 +8,7 @@ import org.rekotlin.StoreSubscriber
 import org.rekotlin.Subscription
 
 
-class UIComponentManager(val store: Store<CheckoutState>) : ViewModel() {
+class CheckoutViewModel(val store: Store<CheckoutState>) : ViewModel() {
 
     private val componentSubscriptions = mutableListOf<StoreSubscriber<out StateType>>()
 

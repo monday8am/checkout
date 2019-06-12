@@ -7,11 +7,26 @@
         android:layout_height="match_parent"
         tools:context=".MainActivity">
 
-    <com.monday8am.checkout.ui.TopComponent
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+    <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:id="@+id/topContainer"
+            app:layout_constraintHeight_percent="0.3"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintVertical_bias="0.0">
+    </RelativeLayout>
+
+    <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:id="@+id/bottomContainer"
+            app:layout_constraintTop_toBottomOf="@id/topContainer"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent">
+    </RelativeLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

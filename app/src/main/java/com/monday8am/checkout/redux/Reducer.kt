@@ -4,7 +4,7 @@ import com.monday8am.checkout.data.Price
 import com.monday8am.checkout.data.Product
 import com.monday8am.checkout.data.discountMap
 import com.monday8am.checkout.helpers.Result
-import com.monday8am.checkout.redux.CheckoutAction.*
+import com.monday8am.checkout.redux.CheckoutActions.*
 import org.rekotlin.Action
 
 
@@ -44,12 +44,19 @@ fun checkoutReducer(action: Action, oldState: CheckoutState?): CheckoutState {
     return state
 }
 
+val products = listOf(
+    Product(code = "MUG", name = "Coffee Mug", price = 7.5f),
+    Product(code = "VOUCHER", name = "Voucher", price = 5f),
+    Product(code = "TSHIRT", name = "T-Shirt", price = 20f)
+)
+
+
 private fun getInitialState(): CheckoutState {
     return CheckoutState(totalPrice = 0f,
                          discountedPrice = 0f,
                          selectedItems = listOf(),
                          discounts = listOf(),
-                         items = Result.Loading)
+                         items = Result.ok(products))
 }
 
 fun List<Product>.totalPrice(): Price {

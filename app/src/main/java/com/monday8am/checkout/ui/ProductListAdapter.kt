@@ -1,26 +1,26 @@
 package com.monday8am.checkout.ui
 
-import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.recyclerview.widget.RecyclerView
 import com.monday8am.checkout.R
-import com.monday8am.checkout.data.Product
-
+import com.monday8am.checkout.redux.CheckoutActions
 import kotlinx.android.synthetic.main.product_item.view.*
+import org.rekotlin.DispatchFunction
 
 
-class ProductListAdapter(private val mValues: List<Product>) : RecyclerView.Adapter<ProductListAdapter.ViewHolder>() {
+class ProductListAdapter(
+    private val mValues: List<ProductInfo>,
+    private val dispatchFunction: DispatchFunction) : RecyclerView.Adapter<ProductListAdapter.ViewHolder>() {
 
     private val mOnClickListener: View.OnClickListener
 
     init {
         mOnClickListener = View.OnClickListener { v ->
-            val item = v.tag as Product
-            // Notify the active callbacks interface (the activity, if the fragment is attached to
-            // one) that an item has been selected.
-            //mListener?.onListFragmentInteraction(item)
+            val item = v.tag as ProductInfo
+
         }
     }
 
@@ -32,12 +32,17 @@ class ProductListAdapter(private val mValues: List<Product>) : RecyclerView.Adap
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = mValues[position]
-        holder.mIdView.text = item.code
-        holder.mContentView.text = item.name
+        holder.mIdView.text = item.product.code
+        holder.mContentView.text = "${item.product.name} (${item.total})"
 
         with(holder.mView) {
             tag = item
-            setOnClickListener(mOnClickListener)
+            addButton.setOnClickListener {
+                dispatchFunction(CheckoutActions.ModifyCheckout(product = item.product))
+            }
+            removeButton.setOnClickListener {
+                dispatchFunction(CheckoutActions.ModifyCheckout(product = item.product, remove = true))
+            }
         }
     }
 

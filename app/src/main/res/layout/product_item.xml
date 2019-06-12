@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
-              android:orientation="horizontal">
+              android:orientation="vertical">
 
     <TextView
             android:id="@+id/item_number"
@@ -17,4 +17,16 @@
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/text_margin"
             android:textAppearance="?attr/textAppearanceListItem"/>
+
+    <Button
+            android:id="@+id/addButton"
+            android:text="+"
+            android:layout_width="40dp"
+            android:layout_height="40dp"/>
+
+    <Button
+            android:id="@+id/removeButton"
+            android:text="-"
+            android:layout_width="40dp"
+            android:layout_height="40dp"/>
 </LinearLayout>

@@ -1,4 +1,9 @@
-package com.monday8am.checkout.data
+package com.monday8am.checkout.helpers
+
+import com.monday8am.checkout.data.Code
+import com.monday8am.checkout.data.DiscountType
+import com.monday8am.checkout.data.Price
+import com.monday8am.checkout.data.Product
 
 typealias DiscountLogic = (productCode: Code, products: List<Product>, newPrice: Price) -> Price
 

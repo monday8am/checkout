@@ -2,7 +2,7 @@ package com.monday8am.checkout.redux
 
 import com.monday8am.checkout.data.Price
 import com.monday8am.checkout.data.Product
-import com.monday8am.checkout.data.discountMap
+import com.monday8am.checkout.helpers.discountMap
 import com.monday8am.checkout.helpers.Result
 import com.monday8am.checkout.redux.CheckoutActions.*
 import org.rekotlin.Action

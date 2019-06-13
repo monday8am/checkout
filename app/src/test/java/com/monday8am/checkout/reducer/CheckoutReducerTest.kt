@@ -4,12 +4,12 @@ import com.monday8am.checkout.*
 import com.monday8am.checkout.data.Discount
 import com.monday8am.checkout.data.DiscountType
 import com.monday8am.checkout.data.Product
+import com.monday8am.checkout.data.totalPrice
 import com.monday8am.checkout.helpers.Result
 import com.monday8am.checkout.helpers.asList
 import com.monday8am.checkout.redux.CheckoutActions.*
 import com.monday8am.checkout.redux.CheckoutState
 import com.monday8am.checkout.redux.checkoutReducer
-import com.monday8am.checkout.redux.totalPrice
 import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test

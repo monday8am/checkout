@@ -1,6 +1,6 @@
 package com.monday8am.checkout.discounts
 
-import com.monday8am.checkout.helpers.bulkDiscountLogic
+import com.monday8am.checkout.data.bulkDiscountLogic
 import com.monday8am.checkout.products
 import org.junit.Assert.assertEquals
 import org.junit.Test

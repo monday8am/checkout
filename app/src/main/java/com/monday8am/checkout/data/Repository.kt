@@ -4,6 +4,7 @@ import com.monday8am.checkout.SchedulerProvider
 import com.monday8am.checkout.data.local.PreferencesHelper
 import com.monday8am.checkout.data.local.ProductDao
 import com.monday8am.checkout.data.remote.RemoteWebService
+import com.monday8am.checkout.data.remote.listDiscounts
 import io.reactivex.Observable
 
 class Repository(private val photoDao: ProductDao,
@@ -14,10 +15,19 @@ class Repository(private val photoDao: ProductDao,
 
     fun updateProductList(): Observable<List<Product>> {
         return webService.listProducts()
-            .flatMap {  products ->
-                photoDao.insertProducts(products)
+            .subscribeOn(scheduleProvider.io())
+            .flatMap {  dto ->
+                photoDao.insertProducts(dto.products)
+                    .subscribeOn(scheduleProvider.io())
+                    .observeOn(scheduleProvider.ui())
                     .toObservable()
-                    .map { products }
+                    .map { dto.products }
             }
+    }
+
+    fun getDiscounts(): Observable<List<Discount>> {
+        return webService.listDiscounts()
+            .subscribeOn(scheduleProvider.io())
+            .observeOn(scheduleProvider.ui())
     }
 }

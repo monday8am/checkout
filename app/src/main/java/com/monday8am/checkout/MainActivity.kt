@@ -3,8 +3,8 @@ package com.monday8am.checkout
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProviders
-import com.monday8am.checkout.ui.CheckoutViewModel
 import com.monday8am.checkout.ui.BottomComponent
+import com.monday8am.checkout.ui.CheckoutViewModel
 import com.monday8am.checkout.ui.TopComponent
 import com.monday8am.checkout.ui.ViewModelFactory
 import kotlinx.android.synthetic.main.activity_main.*
@@ -21,15 +21,11 @@ class MainActivity : AppCompatActivity() {
 
         with(viewModel) {
             addAndSubscribeToStore(TopComponent(topContainer, store.dispatchFunction)) {
-                it.skip { oldState, newState ->
-                    oldState.discountedPrice != newState.discountedPrice
-                }
+                it.skipRepeats()
             }
 
             addAndSubscribeToStore(BottomComponent(bottomContainer, store.dispatchFunction)) {
-                it.skip { oldState, newState ->
-                    oldState.discountedPrice != newState.discountedPrice
-                }
+                it.skipRepeats()
             }
         }
     }

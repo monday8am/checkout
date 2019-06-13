@@ -8,7 +8,8 @@ import org.rekotlin.DispatchFunction
 import org.rekotlin.Middleware
 import org.rekotlin.ReKotlinInit
 
-var disposable: Disposable? = null
+var productsDisp: Disposable? = null
+var discountDisp: Disposable? = null
 
 internal val loggingMiddleware: Middleware<CheckoutState> = { _, _ ->
     { next ->
@@ -19,11 +20,14 @@ internal val loggingMiddleware: Middleware<CheckoutState> = { _, _ ->
     }
 }
 
-internal val networkMiddleware: Middleware<CheckoutState> = { dispatch, getState ->
+internal val networkMiddleware: Middleware<CheckoutState> = { dispatch, _ ->
     { next ->
         { action ->
             when (action) {
-                is ReKotlinInit -> loadProducts(dispatch)
+                is ReKotlinInit -> {
+                    loadProducts(dispatch)
+                    loadDiscounts(dispatch)
+                }
             }
             next(action)
         }
@@ -33,11 +37,21 @@ internal val networkMiddleware: Middleware<CheckoutState> = { dispatch, getState
 fun loadProducts(dispatch: DispatchFunction) {
     val repository = CheckoutApp.repository ?: return
 
-    disposable?.dispose()
-    disposable = repository.updateProductList()
+    productsDisp?.dispose()
+    productsDisp = repository.updateProductList()
         .subscribe ({ result ->
             dispatch(CheckoutActions.AddProducts(payload = Result.ok(result)))
         },{ error ->
             dispatch(CheckoutActions.AddProducts(payload = Result.err(error)))
         })
+}
+
+fun loadDiscounts(dispatch: DispatchFunction) {
+    val repository = CheckoutApp.repository ?: return
+
+    discountDisp?.dispose()
+    discountDisp = repository.getDiscounts()
+        .subscribe { result ->
+            dispatch(CheckoutActions.AddDiscounts(payload = result))
+        }
 }

@@ -8,10 +8,11 @@ import io.reactivex.schedulers.Schedulers
 import retrofit2.http.GET
 import java.util.concurrent.TimeUnit
 
+data class ProductDTO(val products: List<Product>)
 
 interface RemoteWebService {
     @GET("/bins/4bwec/")
-    fun listProducts(): Observable<List<Product>>
+    fun listProducts(): Observable<ProductDTO>
 }
 
 fun RemoteWebService.listDiscounts(): Observable<List<Discount>> {

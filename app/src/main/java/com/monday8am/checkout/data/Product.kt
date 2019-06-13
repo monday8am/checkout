@@ -15,3 +15,18 @@ data class Product @JvmOverloads constructor(
     @ColumnInfo(name = "name") var name: String,
     @ColumnInfo(name = "price") var price: Price = 0f
 )
+
+fun List<Product>.totalPrice(): Price {
+    var price = 0f
+    forEach { price += it.price }
+    return price
+}
+
+fun List<Product>.applyDiscounts(discounts: List<Discount>): Price {
+    return discounts.fold(0f, { acc, nextDiscount ->
+        discountMap[nextDiscount.discountType]?.let { discountLogic ->
+            return@fold acc + discountLogic.invoke(nextDiscount.productCode, this, nextDiscount.newPrice)
+        }
+        return@fold acc
+    })
+}

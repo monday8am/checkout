@@ -42,7 +42,7 @@ class CheckoutApp: Application() {
 
     private fun provideRemoteWebService(): RemoteWebService {
         val retrofit = Retrofit.Builder()
-            .baseUrl("https://api.flickr.com/")
+            .baseUrl("https://api.myjson.com/")
             .addConverterFactory(GsonConverterFactory.create())
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .build()

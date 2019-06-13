@@ -1,19 +1,17 @@
 package com.monday8am.checkout.ui
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.annotation.VisibleForTesting
 import androidx.core.widget.ContentLoadingProgressBar
 import androidx.recyclerview.widget.RecyclerView
 import com.monday8am.checkout.R
 import com.monday8am.checkout.data.Product
-import com.monday8am.checkout.redux.CheckoutState
 import com.monday8am.checkout.helpers.Result
 import com.monday8am.checkout.helpers.asList
+import com.monday8am.checkout.redux.CheckoutState
 import org.rekotlin.DispatchFunction
 import org.rekotlin.StoreSubscriber
 

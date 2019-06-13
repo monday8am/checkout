@@ -15,15 +15,6 @@ class ProductListAdapter(
     private val mValues: List<ProductInfo>,
     private val dispatchFunction: DispatchFunction) : RecyclerView.Adapter<ProductListAdapter.ViewHolder>() {
 
-    private val mOnClickListener: View.OnClickListener
-
-    init {
-        mOnClickListener = View.OnClickListener { v ->
-            val item = v.tag as ProductInfo
-
-        }
-    }
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.product_item, parent, false)

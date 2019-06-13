@@ -38,7 +38,7 @@ fun loadProducts(dispatch: DispatchFunction) {
     val repository = CheckoutApp.repository ?: return
 
     productsDisp?.dispose()
-    productsDisp = repository.updateProductList()
+    productsDisp = repository.getProducts()
         .subscribe ({ result ->
             dispatch(CheckoutActions.AddProducts(payload = Result.ok(result)))
         },{ error ->

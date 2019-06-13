@@ -13,16 +13,26 @@ class Repository(private val photoDao: ProductDao,
                  private val scheduleProvider: SchedulerProvider
 ) {
 
-    fun updateProductList(): Observable<List<Product>> {
-        return webService.listProducts()
+    fun getProducts(): Observable<List<Product>> {
+        return photoDao.getProducts()
             .subscribeOn(scheduleProvider.io())
-            .flatMap {  dto ->
-                photoDao.insertProducts(dto.products)
-                    .subscribeOn(scheduleProvider.io())
-                    .observeOn(scheduleProvider.ui())
-                    .toObservable()
-                    .map { dto.products }
+            .toObservable()
+            .flatMap {
+                return@flatMap if(it.isNotEmpty()) {
+                    Observable.just(it)
+                } else {
+                    webService
+                        .listProducts()
+                        .subscribeOn(scheduleProvider.io())
+                        .flatMap {  dto ->
+                            photoDao.insertProducts(dto.products)
+                                .subscribeOn(scheduleProvider.io())
+                                .toObservable()
+                                .map { dto.products }
+                        }
+                }
             }
+            .observeOn(scheduleProvider.ui())
     }
 
     fun getDiscounts(): Observable<List<Discount>> {

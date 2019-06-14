@@ -1,38 +1,82 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:orientation="vertical">
-
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="wrap_content"
+                android:layout_height="85dp">
     <LinearLayout
             android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
             android:orientation="vertical"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent" >
+            android:layout_height="wrap_content" >
         <TextView
-                android:id="@+id/item_number"
+                tools:text="Code: TEST"
+                android:id="@+id/codeTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/text_margin"
+                android:textColor="@android:color/darker_gray"
+                android:textSize="12sp"
                 android:textAppearance="?attr/textAppearanceListItem"/>
         <TextView
-                android:id="@+id/content"
+                tools:text="Name"
+                android:id="@+id/nameTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/text_margin"
+                android:textSize="17sp"
+                android:textAppearance="?attr/textAppearanceListItem"/>
+        <TextView
+                tools:text="Price: 5.00$"
+                android:textColor="@color/lightGray"
+                android:id="@+id/priceTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
                 android:textAppearance="?attr/textAppearanceListItem"/>
     </LinearLayout>
 
+    <FrameLayout
+            android:layout_centerInParent="true"
+            android:id="@+id/counterInfo"
+            android:background="@drawable/circle_shape"
+            android:layout_width="25dp"
+            android:layout_height="25dp">
+        <TextView
+                tools:text="1"
+                android:textSize="13sp"
+                android:textStyle="bold"
+                android:textAlignment="center"
+                android:textColor="@android:color/white"
+                android:id="@+id/counterTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textAppearance="?attr/textAppearanceListItem"/>
+    </FrameLayout>
 
-    <Button
-            android:id="@+id/addButton"
-            android:text="+"
-            android:layout_width="40dp"
-            android:layout_height="40dp"/>
-
-    <Button
-            android:id="@+id/removeButton"
-            android:text="-"
-            android:layout_width="40dp"
-            android:layout_height="40dp"/>
+    <LinearLayout
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+        <ImageButton
+                android:background="@android:color/transparent"
+                android:src="@drawable/add_button_selector"
+                android:id="@+id/addButton"
+                android:layout_width="42dp"
+                android:layout_height="42dp"
+                tools:ignore="ContentDescription"/>
+        <ImageView
+                android:src="@drawable/ic_separator"
+                android:layout_width="19dp"
+                android:layout_height="42dp"
+                tools:ignore="ContentDescription"/>
+        <ImageButton
+                android:background="@android:color/transparent"
+                android:id="@+id/removeButton"
+                android:src="@drawable/ic_remove_button"
+                android:layout_width="42dp"
+                android:layout_height="42dp"
+                tools:ignore="ContentDescription"/>
+    </LinearLayout>
 </RelativeLayout>

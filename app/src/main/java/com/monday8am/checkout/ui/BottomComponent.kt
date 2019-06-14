@@ -6,9 +6,11 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.annotation.VisibleForTesting
 import androidx.core.widget.ContentLoadingProgressBar
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.monday8am.checkout.R
 import com.monday8am.checkout.data.Product
+import com.monday8am.checkout.helpers.DiffCallback
 import com.monday8am.checkout.helpers.Result
 import com.monday8am.checkout.helpers.asList
 import com.monday8am.checkout.redux.CheckoutState
@@ -21,6 +23,8 @@ class BottomComponent(
     private val container: ViewGroup,
     private val dispatchFunction: DispatchFunction): StoreSubscriber<CheckoutState> {
 
+    private val adapter = ProductListAdapter(dispatchFunction)
+
     private val root =
         LayoutInflater.from(container.context).inflate(
             R.layout.item_list_component_layout,
@@ -30,7 +34,9 @@ class BottomComponent(
 
     @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
     val recyclerView: RecyclerView by lazy {
-        root.findViewById<RecyclerView>(R.id.productRecyclerView)
+        val recycler = root.findViewById<RecyclerView>(R.id.productRecyclerView)
+        recycler.adapter = adapter
+        return@lazy recycler
     }
 
     @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
@@ -61,13 +67,16 @@ class BottomComponent(
                 errorTextView.visibility = View.GONE
                 recyclerView.visibility = View.VISIBLE
 
-                val presentedItems = state.items.asList().map {
+                val newItems = state.items.asList().map {
                     ProductInfo(
                         product = it,
                         total = state.selectedItems.count { product -> product.code == it.code }
                     )
                 }
-                recyclerView.adapter = ProductListAdapter(presentedItems, dispatchFunction)
+
+                val diffResult = DiffUtil.calculateDiff(DiffCallback(newItems, adapter.getItemList()))
+                adapter.setItemList(newItems)
+                diffResult.dispatchUpdatesTo(adapter)
             }
         }
     }

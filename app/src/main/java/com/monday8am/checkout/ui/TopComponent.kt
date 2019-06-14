@@ -36,8 +36,10 @@ class TopComponent(
     }
 
     override fun newState(state: CheckoutState) {
-        resultLabel.text = "${state.totalPrice - state.discountedPrice}"
-        totalLabel.text = "${state.totalPrice}"
-        discountLabel.text = "${state.discountedPrice}"
+        val format = container.context.getString(R.string.price)
+
+        resultLabel.text = String.format(format, state.totalPrice - state.discountedPrice)
+        totalLabel.text = String.format(format, state.totalPrice)
+        discountLabel.text = "- ${String.format(format, state.discountedPrice)}"
     }
 }

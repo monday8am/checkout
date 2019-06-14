@@ -13,7 +13,7 @@ interface ProductDao {
     fun getProducts(): Flowable<List<Product>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertProduct(product: Product): Single<Long>
+    fun insertProducts(products: List<Product>): Single<List<Long>>
 
     @Update
     fun updateProduct(product: Product): Completable

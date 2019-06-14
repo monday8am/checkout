@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Checkout</string>
+    <string name="item_price">Price: %.2f euros</string>
+    <string name="item_code">Code: %s</string>
+    <string name="total_label">Total</string>
+    <string name="saved_label">Saved</string>
+    <string name="final_price_label">Final price</string>
+    <string name="price">%.2f€</string>
 </resources>

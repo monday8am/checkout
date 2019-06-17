@@ -40,6 +40,7 @@ class TopComponent(
 
         resultLabel.text = String.format(format, state.totalPrice - state.discountedPrice)
         totalLabel.text = String.format(format, state.totalPrice)
-        discountLabel.text = "- ${String.format(format, state.discountedPrice)}"
+        val lessStr = if (state.discountedPrice > 0) "- " else ""
+        discountLabel.text = "${lessStr}${String.format(format, state.discountedPrice)}"
     }
 }

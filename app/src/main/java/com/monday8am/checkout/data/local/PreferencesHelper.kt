@@ -7,7 +7,6 @@ import android.util.Log
 import com.google.gson.GsonBuilder
 import com.monday8am.checkout.data.Product
 
-
 class PreferencesHelper constructor(context: Context) {
 
     private val pref: SharedPreferences by lazy {
@@ -29,7 +28,7 @@ class PreferencesHelper constructor(context: Context) {
         return listOf()
     }
 
-    fun saveSelectedProducts(selected: List<Product>)  {
+    fun saveSelectedProducts(selected: List<Product>) {
         val jsonList = gson.toJson(selected)
         pref.edit().putString(keySavedProducts, jsonList).apply()
     }

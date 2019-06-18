@@ -74,7 +74,7 @@
         <ImageButton
                 android:background="@android:color/transparent"
                 android:id="@+id/removeButton"
-                android:src="@drawable/ic_remove_button"
+                android:src="@drawable/remove_button_selector"
                 android:layout_width="42dp"
                 android:layout_height="42dp"
                 tools:ignore="ContentDescription"/>

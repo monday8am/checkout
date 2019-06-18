@@ -39,9 +39,9 @@ fun loadProducts(dispatch: DispatchFunction) {
 
     productsDisp?.dispose()
     productsDisp = repository.getProducts()
-        .subscribe ({ result ->
+        .subscribe({ result ->
             dispatch(CheckoutActions.AddProducts(payload = Result.ok(result)))
-        },{ error ->
+        }, { error ->
             dispatch(CheckoutActions.AddProducts(payload = Result.err(error)))
         })
 }

@@ -11,7 +11,8 @@ import org.rekotlin.StoreSubscriber
 
 class TopComponent(
     private val container: ViewGroup,
-    private val dispatchFunction: DispatchFunction): StoreSubscriber<CheckoutState> {
+    private val dispatchFunction: DispatchFunction
+) : StoreSubscriber<CheckoutState> {
 
     private val root =
         LayoutInflater.from(container.context).inflate(

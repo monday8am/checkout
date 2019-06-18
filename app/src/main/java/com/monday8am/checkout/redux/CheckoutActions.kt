@@ -12,5 +12,4 @@ sealed class CheckoutActions : Action {
     data class AddDiscounts(val payload: List<Discount>) : CheckoutActions()
 
     data class ModifyCheckout(val product: Product, val remove: Boolean = false) : CheckoutActions()
-
 }

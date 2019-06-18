@@ -1,6 +1,5 @@
 package com.monday8am.checkout.data
 
-
 typealias DiscountLogic = (productCode: Code, products: List<Product>, newPrice: Price) -> Price
 
 enum class DiscountType {
@@ -8,9 +7,11 @@ enum class DiscountType {
     Bulk
 }
 
-data class Discount(val discountType: DiscountType,
-                    val productCode: Code,
-                    val newPrice: Price)
+data class Discount(
+    val discountType: DiscountType,
+    val productCode: Code,
+    val newPrice: Price
+)
 
 val discountMap: HashMap<DiscountType, DiscountLogic> = hashMapOf(
     DiscountType.TwoForOne to ::twoForOneDiscountLogic,

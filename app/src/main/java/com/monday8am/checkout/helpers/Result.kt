@@ -1,6 +1,5 @@
 package com.monday8am.checkout.helpers
 
-
 // Based on https://github.com/danneu/kotlin-result
 
 typealias NetworkResult<V, E> = Result<V, E>
@@ -26,7 +25,7 @@ fun <V, E> Result<V, E>.getOrNull() = when (this) {
 fun <V, V2, E> Result<V, E>.flatMap(transformValue: (V) -> Result<V2, E>): Result<V2, E> = when (this) {
     is Result.Ok<V> -> transformValue(value)
     is Result.Err<E> -> this
-    is Result.Loading ->  this
+    is Result.Loading -> this
 }
 
 sealed class Result <out V, out E> {
@@ -39,7 +38,7 @@ sealed class Result <out V, out E> {
 
     object Loading : Result<Nothing, Nothing>()
 
-    data class Ok <out V > internal constructor (val value: V): Result<V, Nothing>() {
+    data class Ok <out V> internal constructor (val value: V) : Result<V, Nothing>() {
         override fun toString() = "Result.Ok($value)"
         override fun hashCode() = value?.hashCode() ?: 0
         override fun equals(other: Any?): Boolean {
@@ -48,7 +47,7 @@ sealed class Result <out V, out E> {
         }
     }
 
-    data class Err <out E> internal constructor (val error: E): Result<Nothing, E>() {
+    data class Err <out E> internal constructor (val error: E) : Result<Nothing, E>() {
         override fun toString() = "Result.Err($error)"
         override fun hashCode() = error?.hashCode() ?: 0
         override fun equals(other: Any?): Boolean {
@@ -58,7 +57,7 @@ sealed class Result <out V, out E> {
     }
 
     companion object {
-        fun <V> ok (value: V): Result.Ok<V> = Ok(value)
-        fun <E> err (error: E): Result.Err<E> = Result.Err(error)
+        fun <V> ok(value: V): Result.Ok<V> = Ok(value)
+        fun <E> err(error: E): Result.Err<E> = Result.Err(error)
     }
 }

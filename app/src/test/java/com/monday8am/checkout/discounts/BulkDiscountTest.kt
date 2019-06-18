@@ -5,7 +5,6 @@ import com.monday8am.checkout.products
 import org.junit.Assert.assertEquals
 import org.junit.Test
 
-
 class BulkDiscountTest {
 
     @Test

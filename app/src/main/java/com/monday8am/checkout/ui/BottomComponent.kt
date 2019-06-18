@@ -21,7 +21,8 @@ data class ProductInfo(val product: Product, val total: Int)
 
 class BottomComponent(
     private val container: ViewGroup,
-    private val dispatchFunction: DispatchFunction): StoreSubscriber<CheckoutState> {
+    private val dispatchFunction: DispatchFunction
+) : StoreSubscriber<CheckoutState> {
 
     private val adapter = ProductListAdapter(dispatchFunction)
 
@@ -50,7 +51,7 @@ class BottomComponent(
     }
 
     override fun newState(state: CheckoutState) {
-        when(state.items) {
+        when (state.items) {
             Result.Loading -> {
                 loaderView.show()
                 errorTextView.visibility = View.GONE

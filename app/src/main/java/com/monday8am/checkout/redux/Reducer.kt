@@ -6,14 +6,15 @@ import com.monday8am.checkout.helpers.Result
 import com.monday8am.checkout.redux.CheckoutActions.*
 import org.rekotlin.Action
 
-
 fun checkoutReducer(action: Action, oldState: CheckoutState?): CheckoutState {
     var state = oldState ?: getInitialState()
 
     when (action) {
         is AddDiscounts -> {
-            state = state.copy(discounts = action.payload,
-                               discountedPrice = state.selectedItems.applyDiscounts(action.payload))
+            state = state.copy(
+                discounts = action.payload,
+                discountedPrice = state.selectedItems.applyDiscounts(action.payload)
+                )
         }
         is AddProducts -> {
             state = state.copy(items = action.payload)
@@ -30,9 +31,11 @@ fun checkoutReducer(action: Action, oldState: CheckoutState?): CheckoutState {
                 mutable.add(action.product)
             }
 
-            state = state.copy(selectedItems = mutable,
-                               discountedPrice = mutable.applyDiscounts(state.discounts),
-                               totalPrice = mutable.totalPrice())
+            state = state.copy(
+                selectedItems = mutable,
+                discountedPrice = mutable.applyDiscounts(state.discounts),
+                totalPrice = mutable.totalPrice()
+                )
         }
     }
 
@@ -40,9 +43,11 @@ fun checkoutReducer(action: Action, oldState: CheckoutState?): CheckoutState {
 }
 
 private fun getInitialState(): CheckoutState {
-    return CheckoutState(totalPrice = 0f,
-                         discountedPrice = 0f,
-                         selectedItems = listOf(),
-                         discounts = listOf(),
-                         items = Result.Loading)
+    return CheckoutState(
+        totalPrice = 0f,
+        discountedPrice = 0f,
+        selectedItems = listOf(),
+        discounts = listOf(),
+        items = Result.Loading
+        )
 }

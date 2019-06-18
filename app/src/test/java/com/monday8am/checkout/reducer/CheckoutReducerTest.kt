@@ -15,7 +15,6 @@ import org.junit.Before
 import org.junit.Test
 import org.rekotlin.Store
 
-
 class CheckoutReducerTest {
 
     private lateinit var store: Store<CheckoutState>

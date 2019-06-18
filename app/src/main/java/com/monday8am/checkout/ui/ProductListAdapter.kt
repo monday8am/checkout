@@ -11,9 +11,9 @@ import com.monday8am.checkout.redux.CheckoutActions
 import kotlinx.android.synthetic.main.product_item.view.*
 import org.rekotlin.DispatchFunction
 
-
 class ProductListAdapter(
-    private val dispatchFunction: DispatchFunction) : RecyclerView.Adapter<ProductListAdapter.ViewHolder>() {
+    private val dispatchFunction: DispatchFunction
+) : RecyclerView.Adapter<ProductListAdapter.ViewHolder>() {
 
     private var models: List<ProductInfo> = listOf()
 

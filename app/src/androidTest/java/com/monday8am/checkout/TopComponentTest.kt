@@ -20,7 +20,6 @@ class TopComponentTest {
     private lateinit var store: Store<CheckoutState>
     private lateinit var topComponent: TopComponent
 
-
     @Before
     fun setupStore() {
         val appContext = InstrumentationRegistry.getInstrumentation().targetContext
@@ -38,5 +37,4 @@ class TopComponentTest {
         Assert.assertEquals(topComponent.discountLabel.text, "- 11,00€")
         Assert.assertEquals(topComponent.resultLabel.text, "4,00€")
     }
-
 }

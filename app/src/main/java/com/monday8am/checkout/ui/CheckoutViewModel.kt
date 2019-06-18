@@ -7,7 +7,6 @@ import org.rekotlin.Store
 import org.rekotlin.StoreSubscriber
 import org.rekotlin.Subscription
 
-
 class CheckoutViewModel(val store: Store<CheckoutState>) : ViewModel() {
 
     private val componentSubscriptions = mutableListOf<StoreSubscriber<out StateType>>()
@@ -17,8 +16,10 @@ class CheckoutViewModel(val store: Store<CheckoutState>) : ViewModel() {
         componentSubscriptions.forEach { store.unsubscribe(it) }
     }
 
-    fun <T : StateType> addAndSubscribeToStore(uiComponent: StoreSubscriber<T>,
-                                               stateTransform:  ((Subscription<CheckoutState>) -> Subscription<T>)?) {
+    fun <T : StateType> addAndSubscribeToStore(
+        uiComponent: StoreSubscriber<T>,
+        stateTransform: ((Subscription<CheckoutState>) -> Subscription<T>)?
+    ) {
         componentSubscriptions.add(uiComponent)
         store.subscribe(uiComponent, stateTransform)
     }

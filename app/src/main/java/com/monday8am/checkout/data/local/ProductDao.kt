@@ -17,5 +17,4 @@ interface ProductDao {
 
     @Update
     fun updateProduct(product: Product): Completable
-
 }

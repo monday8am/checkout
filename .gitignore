@@ -41,9 +41,6 @@ captures/
 .idea/dictionaries
 .idea/libraries
 .idea/caches
-.idea/modules.xml
-.idea/checkout.xml
-.idea/misc.xml
 .idea/vcs.xml
 
 # Keystore files

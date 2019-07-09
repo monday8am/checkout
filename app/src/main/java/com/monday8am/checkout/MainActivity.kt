@@ -12,7 +12,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 class MainActivity : AppCompatActivity() {
 
     private val viewModel: CheckoutViewModel by lazy {
-        ViewModelProviders.of(this, ViewModelFactory.getInstance()).get(CheckoutViewModel::class.java)
+        ViewModelProviders.of(this, ViewModelFactory.getInstance(this)).get(CheckoutViewModel::class.java)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

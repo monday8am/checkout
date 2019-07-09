@@ -1,35 +1,22 @@
 package com.monday8am.checkout
 
-import android.app.Application
 import android.content.Context
 import com.monday8am.checkout.data.Repository
 import com.monday8am.checkout.data.local.PreferencesHelper
 import com.monday8am.checkout.data.local.ProductDao
 import com.monday8am.checkout.data.local.ProductDatabase
 import com.monday8am.checkout.data.remote.RemoteWebService
+import com.monday8am.checkout.ui.ViewModelFactory
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 
-class CheckoutApp : Application() {
+/**
+ * Enables injection of data sources.
+ */
+object Injection {
 
-    override fun onCreate() {
-        super.onCreate()
-        instance = this
-        repository = Repository(
-            photoDao = provideDataSource(applicationContext),
-            preferences = providePreferences(applicationContext),
-            webService = provideRemoteWebService(),
-            scheduleProvider = AppSchedulerProvider()
-        )
-    }
-
-    companion object {
-        @get:Synchronized lateinit var instance: CheckoutApp
-            private set
-
-        var repository: Repository? = null
-    }
+    private var repository: Repository? = null
 
     private fun providePreferences(context: Context): PreferencesHelper {
         return PreferencesHelper(context)
@@ -47,6 +34,26 @@ class CheckoutApp : Application() {
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .build()
 
-        return retrofit.create<RemoteWebService>(RemoteWebService::class.java)
+        return retrofit.create(RemoteWebService::class.java)
+    }
+
+    private fun provideRepository(context: Context): Repository {
+        return if (repository == null) {
+            val repo = Repository(
+                photoDao = provideDataSource(context),
+                preferences = providePreferences(context),
+                webService = provideRemoteWebService(),
+                scheduleProvider = AppSchedulerProvider()
+            )
+            repository = repo
+            repo
+        } else {
+            repository!!
+        }
+    }
+
+    fun provideViewModelFactory(context: Context): ViewModelFactory {
+        val repository = provideRepository(context)
+        return ViewModelFactory(repository)
     }
 }

@@ -11,7 +11,7 @@ import java.util.concurrent.TimeUnit
 data class ProductDTO(val products: List<Product>)
 
 interface RemoteWebService {
-    @GET("/bins/4bwec/")
+    @GET("/bins/9d4a7/")
     fun listProducts(): Observable<ProductDTO>
 }
 
